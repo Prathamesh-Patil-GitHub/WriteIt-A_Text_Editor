@@ -68,15 +68,20 @@ public class WriteIt extends JFrame{
 			public void windowClosing(WindowEvent e){
 				if(!saved){
 					int choice=JOptionPane.showConfirmDialog(WriteIt.this,"Do you want to save the file?","Save file",
-								JOptionPane.YES_NO_CANCEL_OPTION);
+								JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE);
 					if(choice==JOptionPane.YES_OPTION)
 						menuBar.saveFile();
 					else if(choice==JOptionPane.NO_OPTION)
 						System.exit(0);
-					else if(choice==JOptionPane.CANCEL_OPTION)
+					else if(choice==JOptionPane.CANCEL_OPTION || choice==JOptionPane.CLOSED_OPTION){
+						WriteIt.this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 						return;
+					}
 				}
 				System.exit(0);
+			}
+			public void windowClosed(WindowEvent e){
+				WriteIt.this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			}
 		});
 
